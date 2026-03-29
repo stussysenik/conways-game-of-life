@@ -1,0 +1,13 @@
+# LOVE2D
+*.love
+dist/
+
+# macOS
+.DS_Store
+
+# Editor
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
