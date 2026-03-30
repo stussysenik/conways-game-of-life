@@ -4,6 +4,29 @@ Development log for Conway's Game of Life simulator.
 
 ---
 
+## v0.2.0 — Visual System & Documentation (2026-03-30)
+
+### Done
+
+- [x] **Cell age tracking** — Every cell tracks how many generations it has been alive
+- [x] **Age-based color gradient** — 7-tier gradient from white birth flash → electric green → deep forest
+- [x] **Death trails** — Amber glow persists for 6 frames where cells die, revealing dynamics
+- [x] **Automated screenshot capture** — `love . --screenshot` captures all 50 pattern screenshots
+- [x] **Comprehensive README.md** — Table of contents, why/how sections, full pattern gallery with screenshots
+- [x] **50 screenshots** — Every pattern shown in initial + evolved state
+- [x] **Pattern descriptions** — Each pattern documented with history, behavior, and significance
+
+### Visual Effects
+
+Each pattern category now has a distinct visual signature:
+- **Still lifes** → uniform deep forest green (ancient, stable cells)
+- **Oscillators** → pulsing bright/dim with amber death trails on each cycle
+- **Spaceships** → bright white leading edge, amber wake trailing behind
+- **Methuselahs** → chaotic swirl of all colors (constant births and deaths)
+- **Guns** → deep green body, bright white stream of newborn gliders
+
+---
+
 ## v0.1.0 — Initial Release (2026-03-30)
 
 ### Done
@@ -30,43 +53,28 @@ Development log for Conway's Game of Life simulator.
 
 ### Performance
 
-- 100x100 grid at 60fps: ~2-3ms per frame (16.6ms budget)
+- 100x100 grid at 60fps: ~2.3ms per frame (16.6ms budget)
 - Zero allocations per generation (ping-pong buffer reuse)
 
 ---
 
 ## Roadmap
 
-### v0.2.0 — Visual Polish
-- [ ] Cell age tracking (map age to color gradient: bright green → dark green)
-- [ ] Grid zoom and pan (scroll wheel + drag)
-- [ ] Smooth cell transitions (fade in/out)
-- [ ] Custom font for HUD (monospace, larger)
+### v0.3.0 — Interaction Polish
+- [ ] Grid zoom and pan (scroll wheel + middle-mouse drag)
+- [ ] Pattern preview before placement (ghost overlay)
+- [ ] Pattern rotation and flip (R/F keys before placement)
 - [ ] Fullscreen toggle (F11)
+- [ ] Custom monospace font for HUD
 
-### v0.3.0 — Advanced Features
-- [ ] Hashlife algorithm for 1000x1000+ grids
-- [ ] Rule editor (switch between B3/S23, HighLife, Seeds, Day & Night)
-- [ ] Pattern rotation and flip before placement
-- [ ] Generation history (undo/redo with ring buffer)
+### v0.4.0 — Advanced Features
+- [ ] Rule editor UI (switch between B3/S23, HighLife, Seeds, Day & Night)
+- [ ] Generation history with undo/redo (ring buffer)
 - [ ] Population graph overlay
+- [ ] Hashlife algorithm for 1000x1000+ grids
 
-### v0.4.0 — Web & Sharing
+### v0.5.0 — Web & Sharing
 - [ ] love.js web build with GitHub Pages deployment
-- [ ] URL-encoded pattern sharing (pattern in query string)
-- [ ] Screenshot export (PNG)
+- [ ] URL-encoded pattern sharing
+- [ ] Screenshot export (PNG) via in-game hotkey
 - [ ] GIF recording of simulation
-
----
-
-## Architecture Notes
-
-```
-conf.lua        → LOVE2D engine config
-config.lua      → Constants (colors, grid, rules)
-grid.lua        → Pure simulation core
-patterns.lua    → 25 patterns + RLE parser/serializer
-main.lua        → State, rendering, input (only mutable file)
-```
-
-All simulation logic is in `grid.lua` as pure functions. `main.lua` is the only file with mutable state. This separation enables future features like time-travel debugging and parallel simulation.

@@ -1,6 +1,17 @@
 -- main.lua
 -- Conway's Game of Life — LOVE2D application orchestrator.
 -- This is the only file with mutable state.
+--
+-- Pass --screenshot on the command line to run automated screenshot capture:
+--   love . --screenshot
+
+-- Check for screenshot mode before loading anything else
+for _, arg in ipairs(arg or {}) do
+    if arg == "--screenshot" then
+        require("screenshot")
+        return
+    end
+end
 
 local Config   = require("config")
 local grid     = require("grid")
