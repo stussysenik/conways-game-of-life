@@ -20,6 +20,9 @@
 
 ## Table of Contents
 
+![Demo](demo.gif)
+
+
 - [Why This Exists](#why-this-exists)
 - [How It Works](#how-it-works)
   - [The Rules](#the-rules)
